@@ -4,6 +4,7 @@ body:before {
   font-family: monospace;
    }
 
-.test {
-   font-size: 99px;
+
+body {
+   background: black;
 }
