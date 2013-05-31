@@ -5,7 +5,7 @@ window.Kernel = (function() {
 		this.output = output
 		this.version = 0.01;
 		this.files = {"/": {
-			"Users": {
+			"Users/": {
 				"Guest": {
 					"bla.txt": {
 						"content":
@@ -13,11 +13,20 @@ window.Kernel = (function() {
 					}
 				}
 			},
+			"bin/": {
+				"ls": {
+						"man": "Lists the contents of a directory a files<br/>Usage: ls"
+				},
+				"cd": {
+					"man": "Changes your directory<br/>Usage: cd <directory>"
+				},
+				"clear": {
+					"man": "Clears the terminal<br/>Usage: clear"
+				}
+			},
 			"usr/": {
 				"bin/": {
-					"cat": {
-						"man": "Reads a files\nUsage: cat <file>"
-					}
+					
 				}, 
 				"dev/": {
 
@@ -32,10 +41,19 @@ window.Kernel = (function() {
 		this.output.innerHTML += text.toString();
 	}
 
+	Kernel.prototype.clear = function(text) {
+		this.output.innerHTML = "";
+	}
+
 	Kernel.prototype.runCommand = function(cmd) {
-		var args = cmd.split(" ").slice(1);
-		var cmd = cmd.split(" ")[0];
-		this[cmd].apply(this, args);
+		try {
+			var args = cmd.split(" ").slice(1);
+			var cmd = cmd.split(" ")[0];
+			this[cmd].apply(this, args);
+		} catch(e) {
+			this.stdout("Unknown command " + cmd.split(" ")[0]);
+		}
+		this.stdout("<br/><br/>");
 	};
 
 	Kernel.prototype.ls = function () {

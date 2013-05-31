@@ -20,6 +20,10 @@ code, input[type=text] {
 	font-family: 'VT323', sans-serif;	
 }
 
+aside {
+	color: green;
+}
+
 label[for=prompt] {
 	margin-right: 8px;
 }
