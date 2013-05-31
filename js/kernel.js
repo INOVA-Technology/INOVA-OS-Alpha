@@ -7,6 +7,27 @@ window.Kernel = (function() {
 
 	var Kernel = function() {
 		this.version = 0.01;
+		this.files = {"/": {
+			"Users": {
+
+			},
+
+			"usr/": {
+				"bin/": {
+					"grep":
+						"text": {
+							// info to exec
+						}, 
+
+						"openWith": "terminal"
+					}
+				}, 
+
+				"dev/": {
+
+				}
+			}
+		}};
 	}
 
 	// define methods like this
