@@ -29,7 +29,7 @@ window.Kernel = (function() {
 
 	// function for printing text, instead of console.log()
 	Kernel.prototype.stdout = function(text) {
-		this.output.innerHTML = text.toString();
+		this.output.innerHTML += text.toString();
 	}
 
 	Kernel.prototype.runCommand = function(cmd) {
@@ -39,10 +39,10 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.ls = function () {
-		// not working
 		for(var key in this.dir) {
-		    this.stdout(key);
+		    this.stdout(key + "<br/>");
 		}
+		this.stdout("<br/>")
 	}
 
 	Kernel.prototype.info = function () {
@@ -54,15 +54,17 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.man = function(cmd) {
+		var out;
 		try {
-			this.stdout(this.files["/"]["bin/"][cmd]["man"]);
+			out = this.files["/"]["bin/"][cmd]["man"];
 		} catch(e) {
 			try {
-				this.stdout(this.files["/"]["usr/"]["bin/"][cmd]["man"]);
+				out = this.files["/"]["usr/"]["bin/"][cmd]["man"];
 			} catch(e) {
-				this.stdout("Man: Command '" + cmd + "' not found");
+				out = "Man: Command '" + cmd + "' not found";
 			}
 		}
+		this.stdout(out + "<br/><br/>");
 	};
 
 	Kernel.prototype.pwd = function() {
