@@ -10,37 +10,48 @@ window.Kernel = (function() {
 		this.files = {"/": {
 			"Users": {
 				"Guest": {
-
+					"bla.txt": {
+						"content":
+							"This is a test text file"
+					}
 				}
 			},
 			"usr/": {
 				"bin/": {
 					"grep.sh": {
-						"content": {
-							// file text to exec
-						}
+						"content":
+							"" // file text to exec
 					}, 
 					"cat.sh": {
-						"content": {
-
-						}
+						"content":
+							""
 					}
 				}, 
 				"dev/": {
 
-				}
+				}	
 			}
 		}};
+		this.dir = this.files["/"];
 	}
 
 	// define methods like this
-	Kernel.prototype.ls = function (argument) {
-		console.log('this is the file system');
+	Kernel.prototype.ls = function () {
+		console.log(this.dir);
 	}
 
-	Kernel.prototype.info = function (argument) {
+	Kernel.prototype.info = function () {
 		console.log('Version ' + this.version.toString() + ' Alpha');
 	}
+
+	Kernel.prototype.cd = function (path) {
+		this.dir = this.dir[path];
+	}
+
+	Kernel.prototype.pwd = function() {
+		// this will show the path, like: /Users/Guest/
+		// or like /usr/local/bin/
+	};
 
 	return Kernel
 }());

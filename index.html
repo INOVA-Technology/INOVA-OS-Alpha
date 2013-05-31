@@ -18,9 +18,11 @@
 	<script>
 		k = new Kernel();
 
-		k.ls();
 		console.log('this is version ' + k.version.toString());
 		k.info();
+		k.ls()
+		k.cd("usr/");
+		k.ls()
 	</script>
 </body>
 </html>
