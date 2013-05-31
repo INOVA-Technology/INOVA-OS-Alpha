@@ -1,11 +1,8 @@
 window.Kernel = (function() {
 	"use strict"
 
-	// declare private var like this:
-	// var secret = "BLABLABLA";
-	// so the var secret couldnt be acess by doing: k.secret
-
-	var Kernel = function() {
+	var Kernel = function(output) {
+		this.output = output
 		this.version = 0.01;
 		this.files = {"/": {
 			"Users": {
@@ -18,13 +15,8 @@ window.Kernel = (function() {
 			},
 			"usr/": {
 				"bin/": {
-					"grep.sh": {
-						"content":
-							"" // file text to exec
-					}, 
-					"cat.sh": {
-						"content":
-							""
+					"cat": {
+						"man": "Reads a files\nUsage: cat <file>"
 					}
 				}, 
 				"dev/": {
@@ -35,6 +27,11 @@ window.Kernel = (function() {
 		this.dir = this.files["/"];
 	}
 
+	// function for printing text, instead of console.log()
+	Kernel.prototype.stdout = function(text) {
+		this.output.innerHTML = text.toString();
+	}
+
 	Kernel.prototype.runCommand = function(cmd) {
 		var args = cmd.split(" ").slice(1);
 		var cmd = cmd.split(" ")[0];
@@ -42,16 +39,31 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.ls = function () {
-		console.log(this.dir);
+		// not working
+		for(var key in this.dir) {
+		    this.stdout(key);
+		}
 	}
 
 	Kernel.prototype.info = function () {
-		console.log('Version ' + this.version.toString() + ' Alpha');
+		this.stdout('Version ' + this.version.toString() + ' Alpha');
 	}
 
 	Kernel.prototype.cd = function (path) {
 		this.dir = this.dir[path];
 	}
+
+	Kernel.prototype.man = function(cmd) {
+		try {
+			this.stdout(this.files["/"]["bin/"][cmd]["man"]);
+		} catch(e) {
+			try {
+				this.stdout(this.files["/"]["usr/"]["bin/"][cmd]["man"]);
+			} catch(e) {
+				this.stdout("Man: Command '" + cmd + "' not found");
+			}
+		}
+	};
 
 	Kernel.prototype.pwd = function() {
 		// this will show the path, like: /Users/Guest/

@@ -11,7 +11,10 @@
 	<div class="container">
 		<code>
 			<label for="prompt">$</label>
-			<input type="text" name="prompt" autofocus>
+			<input type="text" name="prompt" id="prompt" autofocus>
+			<aside id="output">
+				
+			</aside>
 		</code>
 	</div>
 	
@@ -31,10 +34,12 @@ s.parentNode.insertBefore(wf, s);
 })(); </script>
 <script src="js/kernel.js"></script>
 <script>
-	k = new Kernel();
 
-	var prompt = document.getElementsByName('prompt')[0];
-	// prompt.addEventListener('keydown', k.runCommand(prompt.text), false);
+	output = document.getElementById("output");
+
+	k = new Kernel(output);
+
+	var prompt = document.getElementById('prompt');
 	prompt.addEventListener('keyup', function(e) {
 		if (e.keyCode === 13) {
 			k.runCommand(this.value);
@@ -42,7 +47,12 @@ s.parentNode.insertBefore(wf, s);
 			e.preventDefault();
 		}
 	}, false);
-	// prompt.addEventListener
+
+	prompt.onblur = function(e) {
+		e.preventDefault();
+		this.focus();
+	};
+
 </script>
 </body>
 </html>
