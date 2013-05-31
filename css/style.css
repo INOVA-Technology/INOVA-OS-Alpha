@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=VT323);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
 
 * {
 	-webkit-box-sizing: border-box;
@@ -17,7 +17,7 @@ body {
 code, input[type=text] {
 	font-size: 22px;
 	color: green;
-	font-family: 'VT323', sans-serif;	
+	font-family: 'Inconsolata', sans-serif;	
 }
 
 aside {
