@@ -9,20 +9,23 @@ window.Kernel = (function() {
 		this.version = 0.01;
 		this.files = {"/": {
 			"Users": {
+				"Guest": {
 
+				}
 			},
-
 			"usr/": {
 				"bin/": {
-					"grep":
-						"text": {
-							// info to exec
-						}, 
+					"grep.sh": {
+						"content": {
+							// file text to exec
+						}
+					}, 
+					"cat.sh": {
+						"content": {
 
-						"openWith": "terminal"
+						}
 					}
 				}, 
-
 				"dev/": {
 
 				}
