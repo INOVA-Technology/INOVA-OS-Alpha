@@ -36,10 +36,11 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.runCommand = function(cmd) {
-		this[cmd].call(this);
+		var args = cmd.split(" ").slice(1);
+		var cmd = cmd.split(" ")[0];
+		this[cmd].apply(this, args);
 	};
 
-	// define methods like this
 	Kernel.prototype.ls = function () {
 		console.log(this.dir);
 	}
