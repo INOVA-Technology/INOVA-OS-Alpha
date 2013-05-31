@@ -1,10 +1,31 @@
+@import url(http://fonts.googleapis.com/css?family=VT323);
 
-body:before {
-  white-space: pre;
-  font-family: monospace;
-   }
-
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
 body {
-   background: black;
+	background: black;
+}
+
+.container {
+	margin: 20px;
+}
+
+code, input[type=text] {
+	font-size: 22px;
+	color: green;
+	font-family: 'VT323', cursive;	
+}
+
+label[for=prompt] {
+	margin-right: 8px;
+}
+
+input[type=text] {
+	outline: none;
+	background: none;
+	border: none;
 }

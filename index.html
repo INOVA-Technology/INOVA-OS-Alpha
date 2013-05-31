@@ -3,26 +3,41 @@
 <head>
 	<meta charset="UTF-8">
 	<title>INOVA OS Alpha</title>
+	<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
 	<link href="style.css" rel="stylesheet"> 
 </head>
 <body>
 
 	<div class="container">
-		
-		
-
+		<code>
+			<label for="prompt">$</label>
+			<input type="text" name="prompt" autofocus>
+		</code>
 	</div>
 	
 
-	<script src="js/kernel.js"></script>
-	<script>
-		k = new Kernel();
+<script type="text/javascript">
+WebFontConfig = {
+google: { families: [ 'VT323::latin' ] }
+};
+(function() {
+var wf = document.createElement('script');
+wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+wf.type = 'text/javascript';
+wf.async = 'true';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(wf, s);
+})(); </script>
+<script src="js/kernel.js"></script>
+<script>
+	k = new Kernel();
 
-		console.log('this is version ' + k.version.toString());
-		k.info();
-		k.ls()
-		k.cd("usr/");
-		k.ls()
-	</script>
+	console.log('this is version ' + k.version.toString());
+	k.info();
+	k.ls()
+	k.cd("usr/");
+	k.ls()
+</script>
 </body>
 </html>
