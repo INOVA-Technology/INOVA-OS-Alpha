@@ -33,11 +33,15 @@ s.parentNode.insertBefore(wf, s);
 <script>
 	k = new Kernel();
 
-	console.log('this is version ' + k.version.toString());
-	k.info();
-	k.ls()
-	k.cd("usr/");
-	k.ls()
+	var prompt = document.getElementsByName('prompt')[0];
+	// prompt.addEventListener('keydown', k.runCommand(prompt.text), false);
+	prompt.addEventListener('keyup', function(e) {
+		if (e.keyCode === 13) {
+			k.runCommand(this.value);
+			this.value = "";
+			e.preventDefault();
+		}
+	}, false);
 </script>
 </body>
 </html>

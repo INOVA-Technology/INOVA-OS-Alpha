@@ -35,6 +35,10 @@ window.Kernel = (function() {
 		this.dir = this.files["/"];
 	}
 
+	Kernel.prototype.runCommand = function(cmd) {
+		this[cmd].call(this);
+	};
+
 	// define methods like this
 	Kernel.prototype.ls = function () {
 		console.log(this.dir);

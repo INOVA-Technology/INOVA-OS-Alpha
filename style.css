@@ -17,7 +17,7 @@ body {
 code, input[type=text] {
 	font-size: 22px;
 	color: green;
-	font-family: 'VT323', cursive;	
+	font-family: 'VT323', sans-serif;	
 }
 
 label[for=prompt] {
