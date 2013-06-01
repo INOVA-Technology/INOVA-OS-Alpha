@@ -8,10 +8,13 @@ window.Kernel = (function() {
 			"Users/": {
 				"Guest/": {
 					"bla.txt": {
-						"content":
+						"content": 
 							"This is a test text file"
 					}
-				}
+				},
+                "Admin/": {
+
+                }
 			},
 			"bin/": {
 				"ls": {
@@ -19,6 +22,12 @@ window.Kernel = (function() {
 				},
 				"cd": {
 					"man": "Changes your directory<br/>Usage: cd <directory>"
+				},
+				"fun": {
+					"man": "outputs a word 10 times<br/>Usage: fun <word>"
+				},
+				"help": {
+					"man": "shows a list of commands<br/>Usage: help"
 				},
 				"clear": {
 					"man": "Clears the terminal<br/>Usage: clear"
@@ -51,12 +60,14 @@ window.Kernel = (function() {
 			var cmd = cmd.split(" ")[0];
 			this[cmd].apply(this, args);
 		} catch(e) {
-			this.stdout("Unknown command " + cmd.split(" ")[0]);
+			this.stdout("$ " + cmd.toString() + "<br /><br />");
+			this.stdout("Unknown command " + "\"" +cmd.split(" ")[0] + "\"");
 		}
 		this.stdout("<br/><br/>");
 	};
 
 	Kernel.prototype.ls = function () {
+		this.stdout("$ ls <br /><br />");
 		for(var key in this.dir) {
 		    this.stdout(key + "<br/>");
 		}
@@ -64,20 +75,40 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.info = function () {
+		this.stdout("$ info <br /><br />");
+
 		this.stdout('Version ' + this.version.toString() + ' Alpha');
 	}
 
 	Kernel.prototype.cd = function (path) {
-		if (this.dir[path]) {
-			this.dir = this.dir[path];
-		}
-		else {
-			this.stdout('cd: ' + path + ': No such file or directory');
-		}
+		this.stdout("$ cd " + path.toString());
+		this.dir = this.dir[path];
+	}
+
+	Kernel.prototype.help = function() {
+		this.stdout("$ help <br />");
+		this.stdout("COMMANDS: <br />");
+		this.stdout("ls<br />");
+		this.stdout("cd<br />");
+		this.stdout("info<br />");
+		this.stdout("help<br />");
+		this.stdout("fun<br />");
+		this.stdout("clear<br />");
+	}
+
+	Kernel.prototype.fun = function (text) {
+		var i = 1;
+		this.stdout("$ fun " + text.toString() + "<br />");
+		while (i < 11) {
+		this.stdout(text + " ");
+		i++
+	}
 	}
 
 	Kernel.prototype.man = function(cmd) {
 		var out;
+		this.stdout("$ man " + cmd + "<br /> <br />");
+
 		try {
 			out = this.files["/"]["bin/"][cmd]["man"];
 		} catch(e) {
