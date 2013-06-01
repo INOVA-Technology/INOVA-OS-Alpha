@@ -6,9 +6,9 @@ window.Kernel = (function() {
 		this.version = 0.01;
 		this.files = {"/": {
 			"Users/": {
-				"Guest": {
+				"Guest/": {
 					"bla.txt": {
-						"content":
+						"content": 
 							"This is a test text file"
 					}
 				}
@@ -57,6 +57,7 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.ls = function () {
+		this.stdout("$ ls <br /><br />");
 		for(var key in this.dir) {
 		    this.stdout(key + "<br/>");
 		}
@@ -64,15 +65,20 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.info = function () {
+		this.stdout("$ info <br /><br />");
+
 		this.stdout('Version ' + this.version.toString() + ' Alpha');
 	}
 
 	Kernel.prototype.cd = function (path) {
+		this.stdout("$ cd " + path.toString());
 		this.dir = this.dir[path];
 	}
 
 	Kernel.prototype.man = function(cmd) {
 		var out;
+		this.stdout("$ man " + cmd + "<br /> <br />");
+
 		try {
 			out = this.files["/"]["bin/"][cmd]["man"];
 		} catch(e) {

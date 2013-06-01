@@ -10,11 +10,12 @@
 
 	<div class="container">
 		<code>
-			<label for="prompt">$</label>
-			<input type="text" name="prompt" id="prompt" autofocus>
 			<aside id="output">
 				
 			</aside>
+			<label for="prompt">$</label>
+			<input type="text" name="prompt" id="prompt" autofocus>
+			
 		</code>
 	</div>
 	
@@ -35,7 +36,7 @@ s.parentNode.insertBefore(wf, s);
 <script src="js/kernel.js"></script>
 <script>
 
-	output = document.getElementById("output");
+	output = document.getElementById( "output");
 
 	k = new Kernel(output);
 
