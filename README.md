@@ -2,10 +2,12 @@
 
 This is the alpha version of INOVA OS.
 
-For a list of all/most commands run the help command.
+For a list of all/most commands run the help commands, type:
 
-Type
+    help
+
+to see how to use a command, type:
 
     man <command name>
 
-to see how to use a command.
+
