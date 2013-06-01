@@ -55,38 +55,38 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.runCommand = function(cmd) {
+		this.stdout("$ " + cmd.toString() + "<br/><br/>");
 		try {
 			var args = cmd.split(" ").slice(1);
 			var cmd = cmd.split(" ")[0];
 			this[cmd].apply(this, args);
 		} catch(e) {
-			this.stdout("$ " + cmd.toString() + "<br /><br />");
-			this.stdout("Unknown command " + "\"" +cmd.split(" ")[0] + "\"");
+			this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
 		}
-		this.stdout("<br/><br/>");
+		this.stdout("<br/>");
 	};
 
 	Kernel.prototype.ls = function () {
-		this.stdout("$ ls <br /><br />");
 		for(var key in this.dir) {
 		    this.stdout(key + "<br/>");
 		}
-		this.stdout("<br/>")
+		// this.stdout("<br/>")
 	}
 
 	Kernel.prototype.info = function () {
-		this.stdout("$ info <br /><br />");
-
 		this.stdout('Version ' + this.version.toString() + ' Alpha');
 	}
 
 	Kernel.prototype.cd = function (path) {
-		this.stdout("$ cd " + path.toString());
-		this.dir = this.dir[path];
+		if (this.dir[path]) {
+			this.dir = this.dir[path];
+		}
+		else {
+			this.stdout('cd: ' + path + ': No such file or directory');
+		}
 	}
 
 	Kernel.prototype.help = function() {
-		this.stdout("$ help <br />");
 		this.stdout("COMMANDS: <br />");
 		this.stdout("ls<br />");
 		this.stdout("cd<br />");
@@ -98,17 +98,15 @@ window.Kernel = (function() {
 
 	Kernel.prototype.fun = function (text) {
 		var i = 1;
-		this.stdout("$ fun " + text.toString() + "<br />");
 		while (i < 11) {
-		this.stdout(text + " ");
-		i++
-	}
+			this.stdout(text + " ");
+			i++
+		}
+		this.stdout('<br/>');
 	}
 
 	Kernel.prototype.man = function(cmd) {
 		var out;
-		this.stdout("$ man " + cmd + "<br /> <br />");
-
 		try {
 			out = this.files["/"]["bin/"][cmd]["man"];
 		} catch(e) {
@@ -118,7 +116,7 @@ window.Kernel = (function() {
 				out = "Man: Command '" + cmd + "' not found";
 			}
 		}
-		this.stdout(out + "<br/><br/>");
+		this.stdout(out + "<br/>");
 	};
 
 	Kernel.prototype.pwd = function() {
