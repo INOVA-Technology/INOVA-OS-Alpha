@@ -11,7 +11,10 @@ window.Kernel = (function() {
 						"content": 
 							"This is a test text file"
 					}
-				}
+				},
+                "Admin/": {
+
+                }
 			},
 			"bin/": {
 				"ls": {
@@ -52,7 +55,7 @@ window.Kernel = (function() {
 			this[cmd].apply(this, args);
 		} catch(e) {
 			this.stdout("$ " + cmd.toString() + "<br /><br />");
-			this.stdout("Unknown command " + cmd.split(" ")[0]);
+			this.stdout("Unknown command " + "\"" +cmd.split(" ")[0] + "\"");
 		}
 		this.stdout("<br/><br/>");
 	};
@@ -74,6 +77,15 @@ window.Kernel = (function() {
 	Kernel.prototype.cd = function (path) {
 		this.stdout("$ cd " + path.toString());
 		this.dir = this.dir[path];
+	}
+
+	Kernel.prototype.fun = function (text) {
+		var i = 1;
+		this.stdout("$ fun " + text.toString() + "<br />");
+		while (i < 11) {
+		this.stdout(text);
+		i++
+	}
 	}
 
 	Kernel.prototype.man = function(cmd) {
