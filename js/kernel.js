@@ -6,7 +6,7 @@ window.Kernel = (function() {
 		this.version = 0.01;
 		this.files = {"/": {
 			"Users/": {
-				"Guest": {
+				"Guest/": {
 					"bla.txt": {
 						"content":
 							"This is a test text file"
@@ -68,7 +68,12 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.cd = function (path) {
-		this.dir = this.dir[path];
+		if (this.dir[path]) {
+			this.dir = this.dir[path];
+		}
+		else {
+			this.stdout('cd: ' + path + ': No such file or directory');
+		}
 	}
 
 	Kernel.prototype.man = function(cmd) {
