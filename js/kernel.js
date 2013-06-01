@@ -106,7 +106,7 @@ window.Kernel = (function() {
 	Kernel.prototype.fun = function (text) {
 		var i = 1;
 		while (i < 11) {
-			this.stdout(text + " ");
+			this.stdout(text + " <br />");
 			i++
 		}
 		this.stdout('<br/>');
