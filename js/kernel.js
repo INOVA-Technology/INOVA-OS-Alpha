@@ -51,6 +51,7 @@ window.Kernel = (function() {
 			var cmd = cmd.split(" ")[0];
 			this[cmd].apply(this, args);
 		} catch(e) {
+			this.stdout("$ " + cmd.toString() + "<br /><br />");
 			this.stdout("Unknown command " + cmd.split(" ")[0]);
 		}
 		this.stdout("<br/><br/>");
