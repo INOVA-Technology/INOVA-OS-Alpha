@@ -78,11 +78,18 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.cd = function (path) {
-		if (this.dir[path]) {
-			this.dir = this.dir[path];
+		var i = path;
+
+		if (i == "~") {
+			this.dir = this.files["/"];
 		}
 		else {
-			this.stdout('cd: ' + path + ': No such file or directory');
+			if (this.dir[path]) {
+				this.dir = this.dir[path];
+			}
+			else {
+				this.stdout('cd: ' + path + ': No such file or directory');
+			}
 		}
 	}
 
