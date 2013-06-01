@@ -23,6 +23,12 @@ window.Kernel = (function() {
 				"cd": {
 					"man": "Changes your directory<br/>Usage: cd <directory>"
 				},
+				"fun": {
+					"man": "outputs a word 10 times<br/>Usage: fun <word>"
+				},
+				"help": {
+					"man": "shows a list of commands<br/>Usage: help"
+				},
 				"clear": {
 					"man": "Clears the terminal<br/>Usage: clear"
 				}
@@ -79,11 +85,22 @@ window.Kernel = (function() {
 		this.dir = this.dir[path];
 	}
 
+	Kernel.prototype.help = function() {
+		this.stdout("$ help <br />");
+		this.stdout("COMMANDS: <br />");
+		this.stdout("ls<br />");
+		this.stdout("cd<br />");
+		this.stdout("info<br />");
+		this.stdout("help<br />");
+		this.stdout("fun<br />");
+		this.stdout("clear<br />");
+	}
+
 	Kernel.prototype.fun = function (text) {
 		var i = 1;
 		this.stdout("$ fun " + text.toString() + "<br />");
 		while (i < 11) {
-		this.stdout(text);
+		this.stdout(text + " ");
 		i++
 	}
 	}
