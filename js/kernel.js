@@ -11,9 +11,18 @@ window.Kernel = (function() {
 						"content": 
 							"This is a test text file"
 					}
+					
 				},
                 "Admin/": {
+                    "html.html": {
+						"content": 
+							"yo"
+							//<body>
+							//I can program html!
+							//</body>
 
+							//</html>"
+					} 
                 }
 			},
 			"bin/": {
