@@ -54,6 +54,10 @@ window.Kernel = (function() {
 		this.output.innerHTML = "";
 	}
 
+	Kernel.prototype.cat = function(file) {
+		this.stdout(this.dir[file]["content"] + "<br/>");
+	}
+
 	Kernel.prototype.runCommand = function(cmd) {
 		this.stdout("$ " + cmd.toString() + "<br/><br/>");
 		try {
