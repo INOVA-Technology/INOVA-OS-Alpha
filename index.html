@@ -41,10 +41,13 @@ s.parentNode.insertBefore(wf, s);
 
 	k = new Kernel(output);
 
+	var history = [];
+
 	var prompt = document.getElementById('prompt');
 	prompt.addEventListener('keyup', function(e) {
 		if (e.keyCode === 13) {
 			k.runCommand(this.value);
+			history = history.concat([this.value]);
 			this.value = "";
 			e.preventDefault();
 		}
