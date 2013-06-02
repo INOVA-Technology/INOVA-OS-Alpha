@@ -103,9 +103,10 @@ window.Kernel = (function() {
 		this.stdout("clear<br />");
 	}
 
-	Kernel.prototype.fun = function (text) {
+	Kernel.prototype.fun = function (a, b) {
 		var i = 1;
-		while (i < 11) {
+		var a = parseInt(b, 10);
+		while (i < a) {
 			this.stdout(text + " <br />");
 			i++
 		}
