@@ -31,7 +31,7 @@ window.Kernel = (function() {
 				},
 				"clear": {
 					"man": "Clears the terminal<br/>Usage: clear"
-				}
+				},
 				"cat": {
 					"man": "prints content of a file<br/>Usage: cat <filename>"
 				}
