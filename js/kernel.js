@@ -24,7 +24,7 @@ window.Kernel = (function() {
 					"man": "Changes your directory<br/>Usage: cd <directory>"
 				},
 				"fun": {
-					"man": "outputs a word 10 times<br/>Usage: fun <word>"
+					"man": "outputs a word an amount of times<br/>Usage: fun <word> <times>"
 				},
 				"help": {
 					"man": "shows a list of commands<br/>Usage: help"
