@@ -73,9 +73,16 @@ window.Kernel = (function() {
 		this.stdout("<br/>");
 	};
 
-	Kernel.prototype.ls = function () {
-		for(var key in this.dir) {
-		    this.stdout(key + "<br/>");
+	Kernel.prototype.ls = function (file) {
+		if (file) {
+			for(var key in this.dir[file]) {
+			    this.stdout(key + "<br/>");
+			}
+		}
+		else {
+			for(var key in this.dir) {
+			    this.stdout(key + "<br/>");
+			}
 		}
 		// this.stdout("<br/>")
 	}
