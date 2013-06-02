@@ -17,11 +17,7 @@ window.Kernel = (function() {
                     "html.html": {
 						"content": 
 							"yo"
-							//<body>
-							//I can program html!
-							//</body>
-
-							//</html>"
+							
 					} 
                 }
 			},
