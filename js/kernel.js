@@ -32,6 +32,9 @@ window.Kernel = (function() {
 				"clear": {
 					"man": "Clears the terminal<br/>Usage: clear"
 				}
+				"cat": {
+					"man": "prints content of a file<br/>Usage: cat <filename>"
+				}
 			},
 			"usr/": {
 				"bin/": {
@@ -105,6 +108,7 @@ window.Kernel = (function() {
 		this.stdout("help<br />");
 		this.stdout("fun<br />");
 		this.stdout("clear<br />");
+		this.stdout("cat<br />");
 	}
 
 	Kernel.prototype.fun = function (text, times) {
