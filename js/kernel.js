@@ -1,11 +1,15 @@
 window.Kernel = (function() {
 	"use strict"
-
+    var username = "Johny";
+   
 	var Kernel = function(output) {
 		this.output = output
 		this.version = 0.01;
 		this.files = {"/": {
 			"Users/": {
+				"Johny/": {
+
+				},
 				"Guest/": {
 					"bla.txt": {
 						"content": 
@@ -66,8 +70,14 @@ window.Kernel = (function() {
 		this.stdout(this.dir[file]["content"] + "<br/>");
 	}
 
+	Kernel.prototype.login = function(name) {
+		username = name;
+		this.stdout("logged in as " + name + "<br />");
+
+	}
+
 	Kernel.prototype.runCommand = function(cmd) {
-		this.stdout("$ " + cmd.toString() + "<br/><br/>");
+		this.stdout(username + "$ " + cmd.toString() + "<br/><br/>");
 		try {
 			var args = cmd.split(" ").slice(1);
 			var cmd = cmd.split(" ")[0];
