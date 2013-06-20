@@ -1,6 +1,7 @@
 window.Kernel = (function() {
 	"use strict"
-    var username = "Johny";
+    var username = ["root", "Johny", "Guest"];
+    var currentUsr = username[0];
    
 	var Kernel = function(output) {
 		this.output = output
@@ -71,13 +72,17 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.login = function(name) {
-		username = name;
-		this.stdout("logged in as " + name + "<br />");
-
+		if (name != username[0] || name != username[1] || name != username[2]) {
+			this.stdout("Not a real user");
+        }
+        else {
+        	currentUsr = name;
+			this.stdout("logged in as " + currentUsr + "<br />");
+	    }
 	}
 
 	Kernel.prototype.runCommand = function(cmd) {
-		this.stdout(username + "$ " + cmd.toString() + "<br/><br/>");
+		this.stdout(currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
 		try {
 			var args = cmd.split(" ").slice(1);
 			var cmd = cmd.split(" ")[0];
