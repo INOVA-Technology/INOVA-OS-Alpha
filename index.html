@@ -13,7 +13,7 @@
 			<aside id="output">
 				
 			</aside>
-			<label for="prompt">$</label>
+			<label for="prompt" id="prompt-label">$</label>
 			<input type="text" name="prompt" id="prompt" autofocus>
 			
 		</code>
@@ -47,6 +47,10 @@ s.parentNode.insertBefore(wf, s);
 	prompt.addEventListener('keyup', function(e) {
 		if (e.keyCode === 13) {
 			k.runCommand(this.value);
+			if (this.value.substr(0, 5) === "login") {
+				var user = this.value.substr(5);
+				document.getElementById('prompt-label').innerHTML = user + "$";
+			}
 			history = history.concat([this.value]);
 			this.value = "";
 			e.preventDefault();
