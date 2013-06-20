@@ -1,11 +1,11 @@
 window.Kernel = (function() {
 	"use strict"
-    var username = ["root", "Johny", "Guest"];
-    var currentUsr = username[0];
    
 	var Kernel = function(output) {
-		this.output = output
+		this.output = output;
 		this.version = 0.01;
+		this.username = ["root", "Johny", "Guest"];
+    	this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
 				"Johny/": {
@@ -58,6 +58,15 @@ window.Kernel = (function() {
 		this.dir = this.files["/"];
 	}
 
+	Array.prototype.contains = function(obj) {
+	  var i, l = this.length;
+	  for (i = 0; i < l; i++)
+	  {
+	    if (this[i] == obj) return true;
+	  }
+	  return false;
+	};
+
 	// function for printing text, instead of console.log()
 	Kernel.prototype.stdout = function(text) {
 		this.output.innerHTML += text.toString();
@@ -72,17 +81,26 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.login = function(name) {
-		if (name != username[0] || name != username[1] || name != username[2]) {
-			this.stdout("Not a real user");
+		if (this.username.contains(name)) {
+			this.currentUsr = name;
+			this.stdout("logged in as " + this.currentUsr + "<br />");
         }
         else {
-        	currentUsr = name;
-			this.stdout("logged in as " + currentUsr + "<br />");
+        	this.stdout("Not a real user");
 	    }
 	}
 
+	Kernel.prototype.whoami = function(display) {
+		display = typeof display !== 'undefined' ? display : true;
+		if (display) {
+			this.stdout(this.currentUsr);
+		} else {
+			return this.currentUsr;
+		}
+	};
+
 	Kernel.prototype.runCommand = function(cmd) {
-		this.stdout(currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
+		this.stdout(this.currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
 		try {
 			var args = cmd.split(" ").slice(1);
 			var cmd = cmd.split(" ")[0];

@@ -37,23 +37,31 @@ s.parentNode.insertBefore(wf, s);
 <script src="js/kernel.js"></script>
 <script>
 
-	output = document.getElementById("output");
+	var output = document.getElementById("output");
 
-	k = new Kernel(output);
-        
+	var k = new Kernel(output),
+		user = k.whoami(false),
+		label = document.getElementById('prompt-label');
+	label.innerHTML = user + "$";
+       // 38 
         var history = [];
+				var history_index = history.last;
         
 	var prompt = document.getElementById('prompt');
 	prompt.addEventListener('keyup', function(e) {
 		if (e.keyCode === 13) {
 			k.runCommand(this.value);
 			if (this.value.substr(0, 5) === "login") {
-				var user = this.value.substr(5);
-				document.getElementById('prompt-label').innerHTML = user + "$";
+				var user = k.whoami(false);
+				label.innerHTML = user + "$";
 			}
 			history = history.concat([this.value]);
 			this.value = "";
+			history_index = history[history.length - 1];
 			e.preventDefault();
+		} else if (e.keycode === 38) {
+			history = history.concat([this.value]);
+			this.value = history[history_index];
 		}
 	}, false);
 
