@@ -90,6 +90,11 @@ window.Kernel = (function() {
 	    }
 	}
 
+	Kernel.prototype.newUsr = function(name) {
+		this.username.push(name);
+		this.stdout("New user: " + name);
+	}
+
 	Kernel.prototype.whoami = function(display) {
 		display = typeof display !== 'undefined' ? display : true;
 		if (display) {
