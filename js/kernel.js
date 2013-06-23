@@ -44,6 +44,18 @@ window.Kernel = (function() {
 				},
 				"cat": {
 					"man": "prints content of a file<br/>Usage: cat <filename>"
+				},
+				"whoami": {
+					"man": "tells what the current user is<br/>Usage: whoami"
+				},
+				"login": {
+					"man": "logs in as a different user<br/>Usage: login <user>"
+				},
+				"newUsr": {
+					"man": "creates a new user<br/>Usage: newUsr <username>"
+				},
+				"usrList": {
+					"man": "shows list of users<br/>Usage: usrList"
 				}
 			},
 			"usr/": {
@@ -93,6 +105,10 @@ window.Kernel = (function() {
 	Kernel.prototype.newUsr = function(name) {
 		this.username.push(name);
 		this.stdout("New user: " + name);
+	}
+
+	Kernel.prototype.usrList = function() {
+		this.stdout("Users: <br />" + this.username + "<br />");
 	}
 
 	Kernel.prototype.whoami = function(display) {
