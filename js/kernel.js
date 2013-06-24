@@ -175,6 +175,10 @@ window.Kernel = (function() {
 		this.stdout("fun<br />");
 		this.stdout("clear<br />");
 		this.stdout("cat<br />");
+		this.stdout("whoami<br />");
+		this.stdout("login<br />");
+		this.stdout("newUsr<br />");
+		this.stdout("usrList<br />");
 	}
 
 	Kernel.prototype.fun = function (text, times) {
