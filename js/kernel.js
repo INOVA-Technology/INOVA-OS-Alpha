@@ -89,6 +89,7 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.cat = function(file) {
+		
 		this.stdout(this.dir[file]["content"] + "<br/>");
 	}
 
@@ -206,14 +207,23 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.mkdir = function(file) {
-		this.dir[file + "/"] = {};
-		
+		if (file == undefined) {
+			this.stdout("please enter a folder name <br />");
+		}
+		else {
+			this.dir[file + "/"] = {};
+		}
 	};
 
 	Kernel.prototype.touch = function(file) {
-		this.dir[file] = {
-			content: ""
-		};
+		if (file == undefined) {
+			this.stdout("please enter a file name <br />");
+		}
+		else {
+			this.dir[file] = {
+				content: ""
+			};	
+		}
 		
 	};
 
