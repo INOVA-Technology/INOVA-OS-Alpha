@@ -90,7 +90,7 @@ window.Kernel = (function() {
 
 	Kernel.prototype.cat = function(file) {
 		if (file != undefined) {
-    		this.stdout(this.dir[file]["content"] + "<br/>");
+				this.stdout(this.dir[file]["content"] + "<br/>");
     	}
     	else {
     		this.stdout("please include a file name");
@@ -105,6 +105,10 @@ window.Kernel = (function() {
         else {
         	this.stdout("Not a real user");
 	    }
+	}
+
+	Kernel.prototype.write = function(file, text) {
+		this.dir[file]["content"] = '"' + text + '"';
 	}
 
 	Kernel.prototype.newUsr = function(name) {
