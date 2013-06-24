@@ -208,8 +208,13 @@ window.Kernel = (function() {
 	Kernel.prototype.mkdir = function(file) {
 		this.dir[file + "/"] = {};
 		
-		// this will show the path, like: /Users/Guest/
-		// or like /usr/local/bin/
+	};
+
+	Kernel.prototype.touch = function(file) {
+		this.dir[file] = {
+			content: ""
+		};
+		
 	};
 
 	Kernel.prototype.pwd = function() {
