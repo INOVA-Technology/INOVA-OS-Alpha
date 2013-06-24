@@ -205,7 +205,15 @@ window.Kernel = (function() {
 		this.stdout(out + "<br/>");
 	};
 
+	Kernel.prototype.mkdir = function(file) {
+		this.dir[file + "/"] = file;
+		
+		// this will show the path, like: /Users/Guest/
+		// or like /usr/local/bin/
+	};
+
 	Kernel.prototype.pwd = function() {
+		
 		// this will show the path, like: /Users/Guest/
 		// or like /usr/local/bin/
 	};
