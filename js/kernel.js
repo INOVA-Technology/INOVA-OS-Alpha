@@ -206,7 +206,7 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.mkdir = function(file) {
-		this.dir[file + "/"] = file;
+		this.dir[file + "/"] = {};
 		
 		// this will show the path, like: /Users/Guest/
 		// or like /usr/local/bin/
