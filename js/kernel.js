@@ -89,9 +89,13 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.cat = function(file) {
-		
-		this.stdout(this.dir[file]["content"] + "<br/>");
-	}
+		if (file != undefined) {
+    		this.stdout(this.dir[file]["content"] + "<br/>");
+    	}
+    	else {
+    		this.stdout("please include a file name");
+    	}
+    }
 
 	Kernel.prototype.login = function(name) {
 		if (this.username.contains(name)) {
