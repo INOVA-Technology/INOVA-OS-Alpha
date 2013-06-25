@@ -9,7 +9,7 @@ window.Kernel = (function() {
 			"root": "bacon",
 			"Johny": "ham",
 			"Guest": "andEggs"
-		}
+		};
   		this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
@@ -219,7 +219,7 @@ window.Kernel = (function() {
 		this.stdout("newUsr<br />");
 		this.stdout("usrList<br />");
 		this.stdout("rm<br />");
-	}
+	};
 
 	Kernel.prototype.fun = function (text, times) {
 		var i = 1;
@@ -272,5 +272,5 @@ window.Kernel = (function() {
 		// or like /usr/local/bin/
 	};
 
-	return Kernel
+	return Kernel;
 }());
