@@ -109,7 +109,8 @@ window.Kernel = (function() {
 
 
 	Kernel.prototype.write = function(file, text) {
-		this.dir[file]["content"] = text;
+		this.dir[file] = {};
+		this.dir[file]["content"] = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
 	}
 
 	Kernel.prototype.newUsr = function(name) {
