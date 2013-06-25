@@ -89,8 +89,13 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.rm = function(file) {
-		delete this.dir[file];
-		this.stdout(file + " has been deleted");
+		if (file != "Users/" && file != "bin/" && file != "usr/") {
+			delete this.dir[file];
+			this.stdout(file + " has been deleted");
+		}
+		else {
+			this.stdout("you do not have permissions to delete this folder");
+		}
 	}
 
 	Kernel.prototype.cat = function(file) {
