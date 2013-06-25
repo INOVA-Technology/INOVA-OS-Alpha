@@ -5,7 +5,7 @@ window.Kernel = (function() {
 		this.output = output;
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
-  	this.currentUsr = this.username[0];
+  		this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
 				"Johny/": {
@@ -143,6 +143,9 @@ window.Kernel = (function() {
 			console.error(e.message);
 		}
 		this.stdout("<br/>");
+		cookie.set({
+			theFiles: this.files
+		});
 	};
 
 	Kernel.prototype.ls = function (file) {
