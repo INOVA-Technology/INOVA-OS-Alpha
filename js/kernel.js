@@ -167,9 +167,6 @@ window.Kernel = (function() {
 			console.error(e.message);
 		}
 		this.stdout("<br/>");
-		cookie.set({
-			theFiles: this.files
-		});
 	};
 
 	Kernel.prototype.ls = function (file) {
