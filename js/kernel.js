@@ -88,6 +88,11 @@ window.Kernel = (function() {
 		this.output.innerHTML = "";
 	}
 
+	Kernel.prototype.rm = function(file) {
+		delete this.dir[file];
+		this.stdout(file + " has been deleted");
+	}
+
 	Kernel.prototype.cat = function(file) {
 		if (file != undefined) {
 				this.stdout(this.dir[file]["content"] + "<br/>");
