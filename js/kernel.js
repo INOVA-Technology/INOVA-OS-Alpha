@@ -31,10 +31,10 @@ window.Kernel = (function() {
 						"man": "Lists the contents of a directory a files<br/>Usage: ls"
 				},
 				"cd": {
-					"man": "Changes your directory<br/>Usage: cd <directory>"
+					"man": "Changes your directory<br/>Usage: cd [directory]"
 				},
 				"fun": {
-					"man": "outputs a word an amount of times<br/>Usage: fun <word> <times>"
+					"man": "outputs a word an amount of times<br/>Usage: fun [word] [times]"
 				},
 				"help": {
 					"man": "shows a list of commands<br/>Usage: help"
@@ -43,19 +43,22 @@ window.Kernel = (function() {
 					"man": "Clears the terminal<br/>Usage: clear"
 				},
 				"cat": {
-					"man": "prints content of a file<br/>Usage: cat <filename>"
+					"man": "prints content of a file<br/>Usage: cat [filename]"
 				},
 				"whoami": {
 					"man": "tells what the current user is<br/>Usage: whoami"
 				},
 				"login": {
-					"man": "logs in as a different user<br/>Usage: login <user>"
+					"man": "logs in as a different user<br/>Usage: login [user]"
 				},
 				"newUsr": {
-					"man": "creates a new user<br/>Usage: newUsr <username>"
+					"man": "creates a new user<br/>Usage: newUsr [username]"
 				},
 				"usrList": {
 					"man": "shows list of users<br/>Usage: usrList"
+				},
+				"rm": {
+					"man": "removes a file<br/>Usage: rm [file]"
 				}
 			},
 			"usr/": {
@@ -204,6 +207,7 @@ window.Kernel = (function() {
 		this.stdout("login<br />");
 		this.stdout("newUsr<br />");
 		this.stdout("usrList<br />");
+		this.stdout("rm<br />");
 	}
 
 	Kernel.prototype.fun = function (text, times) {
