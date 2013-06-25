@@ -108,11 +108,12 @@ window.Kernel = (function() {
 	}
 
 	Kernel.prototype.write = function(file, text) {
-		this.dir[file]["content"] = '"' + text + '"';
+		this.dir[file]["content"] = text;
 	}
 
 	Kernel.prototype.newUsr = function(name) {
 		this.username.push(name);
+		this.files["/"]["Users/"][name + "/"] = {};
 		this.stdout("New user: " + name);
 	}
 
