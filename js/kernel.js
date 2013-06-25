@@ -107,13 +107,14 @@ window.Kernel = (function() {
 	    }
 	}
 
-	Kernel.prototype.write = function(file) {
-		this.dir[file] = {};
-		this.dir[file]["content"] = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
+
+	Kernel.prototype.write = function(file, text) {
+		this.dir[file]["content"] = text;
 	}
 
 	Kernel.prototype.newUsr = function(name) {
 		this.username.push(name);
+		this.files["/"]["Users/"][name + "/"] = {};
 		this.stdout("New user: " + name);
 	}
 
