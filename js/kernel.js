@@ -5,7 +5,12 @@ window.Kernel = (function() {
 		this.output = output;
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
-        this.currentUsr = this.username[0];
+		this.password = {
+			"root": "bacon",
+			"Johny": "ham",
+			"Guest": "andEggs"
+		}
+  		this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
 				"Johny/": {
@@ -31,10 +36,10 @@ window.Kernel = (function() {
 				    "man": "Lists the contents of a directory a files<br/>Usage: ls"
 				},
 				"cd": {
-					"man": "Changes your directory<br/>Usage: cd <directory>"
+					"man": "Changes your directory<br/>Usage: cd [directory]"
 				},
 				"fun": {
-					"man": "outputs a word an amount of times<br/>Usage: fun <word> <times>"
+					"man": "outputs a word an amount of times<br/>Usage: fun [word] [times]"
 				},
 				"help": {
 					"man": "shows a list of commands<br/>Usage: help"
@@ -43,19 +48,22 @@ window.Kernel = (function() {
 					"man": "Clears the terminal<br/>Usage: clear"
 				},
 				"cat": {
-					"man": "prints content of a file<br/>Usage: cat <filename>"
+					"man": "prints content of a file<br/>Usage: cat [filename]"
 				},
 				"whoami": {
 					"man": "tells what the current user is<br/>Usage: whoami"
 				},
 				"login": {
-					"man": "logs in as a different user<br/>Usage: login <user>"
+					"man": "logs in as a different user<br/>Usage: login [user]"
 				},
 				"newUsr": {
-					"man": "creates a new user<br/>Usage: newUsr <username>"
+					"man": "creates a new user<br/>Usage: newUsr [username]"
 				},
 				"usrList": {
 					"man": "shows list of users<br/>Usage: usrList"
+				},
+				"rm": {
+					"man": "removes a file<br/>Usage: rm [file]"
 				}
 			},
 			"usr/": {
@@ -89,6 +97,16 @@ window.Kernel = (function() {
 		this.output.innerHTML = "";
 	};
 
+	Kernel.prototype.rm = function(file) {
+		if (file != "Users/" && file != "bin/" && file != "usr/") {
+			delete this.dir[file];
+			this.stdout(file + " has been deleted");
+		}
+		else {
+			this.stdout("you do not have permissions to delete this folder");
+		}
+	}
+
 	Kernel.prototype.cat = function(file) {
 		if (file !== undefined) {
             this.stdout(this.dir[file].content + "<br/>");
@@ -97,10 +115,15 @@ window.Kernel = (function() {
     	}
     };
 
-	Kernel.prototype.login = function(name) {
-		if (this.username.contains(name)) {
-			this.currentUsr = name;
-			this.stdout("logged in as " + this.currentUsr + "<br />");
+	Kernel.prototype.login = function(guy, pass) {
+		if (this.username.contains(guy)) {
+			if (pass == this.password[guy]) {
+				this.currentUsr = guy;
+				this.stdout("logged in as " + this.currentUsr + "<br />");
+			}
+			else {
+				this.stdout("wrong password");
+			}
         }
         else {
         	this.stdout("Not a real user");
@@ -113,9 +136,10 @@ window.Kernel = (function() {
 		this.dir[file].content = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
 	};
 
-	Kernel.prototype.newUsr = function(name) {
+	Kernel.prototype.newUsr = function(name, pass) {
 		this.username.push(name);
 		this.files["/"]["Users/"][name + "/"] = {};
+		this.password[name] = '"' + pass + '"'
 		this.stdout("New user: " + name);
 	};
 
@@ -143,6 +167,9 @@ window.Kernel = (function() {
 			console.error(e.message);
 		}
 		this.stdout("<br/>");
+		cookie.set({
+			theFiles: this.files
+		});
 	};
 
 	Kernel.prototype.ls = function (file) {
@@ -191,7 +218,8 @@ window.Kernel = (function() {
 		this.stdout("login<br />");
 		this.stdout("newUsr<br />");
 		this.stdout("usrList<br />");
-	};
+		this.stdout("rm<br />");
+	}
 
 	Kernel.prototype.fun = function (text, times) {
 		var i = 1;

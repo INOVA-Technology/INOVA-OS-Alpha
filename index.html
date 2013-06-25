@@ -34,9 +34,12 @@ var s = document.getElementsByTagName('script')[0];
 s.parentNode.insertBefore(wf, s);
 })(); </script>
 
+<script src="cookie.min.js"></script>
 <script src="js/kernel.js"></script>
 <script>
-
+	if (cookie.get('theFiles')) {
+		console.log("yep");
+	}
 	var output = document.getElementById("output");
 
 	var k = new Kernel(output),
