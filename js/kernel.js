@@ -5,6 +5,11 @@ window.Kernel = (function() {
 		this.output = output;
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
+		this.password = {
+			"root": "bacon",
+			"Johny": "ham",
+			"Guest": "andEggs"
+		}
   		this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
@@ -110,10 +115,15 @@ window.Kernel = (function() {
     	}
     }
 
-	Kernel.prototype.login = function(name) {
-		if (this.username.contains(name)) {
-			this.currentUsr = name;
-			this.stdout("logged in as " + this.currentUsr + "<br />");
+	Kernel.prototype.login = function(guy, pass) {
+		if (this.username.contains(guy)) {
+			if (pass == this.password[guy]) {
+				this.currentUsr = guy;
+				this.stdout("logged in as " + this.currentUsr + "<br />");
+			}
+			else {
+				this.stdout("wrong password");
+			}
         }
         else {
         	this.stdout("Not a real user");
@@ -126,9 +136,10 @@ window.Kernel = (function() {
 		this.dir[file]["content"] = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
 	}
 
-	Kernel.prototype.newUsr = function(name) {
+	Kernel.prototype.newUsr = function(name, pass) {
 		this.username.push(name);
 		this.files["/"]["Users/"][name + "/"] = {};
+		this.password[name] = '"' + pass + '"'
 		this.stdout("New user: " + name);
 	}
 
