@@ -1,11 +1,11 @@
 window.Kernel = (function() {
-	"use strict"
+	"use strict";
 
 	var Kernel = function(output) {
 		this.output = output;
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
-  	this.currentUsr = this.username[0];
+        this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
 				"Johny/": {
@@ -28,7 +28,7 @@ window.Kernel = (function() {
 			},
 			"bin/": {
 				"ls": {
-						"man": "Lists the contents of a directory a files<br/>Usage: ls"
+				    "man": "Lists the contents of a directory a files<br/>Usage: ls"
 				},
 				"cd": {
 					"man": "Changes your directory<br/>Usage: cd <directory>"
@@ -68,34 +68,34 @@ window.Kernel = (function() {
 			}
 		}};
 		this.dir = this.files["/"];
-	}
+	};
 
 	Array.prototype.contains = function(obj) {
-	  var i, l = this.length;
-	  for (i = 0; i < l; i++)
-	  {
-	    if (this[i] == obj) return true;
-	  }
-	  return false;
+        var i, l = this.length;
+        for (i = 0; i < l; i++) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
 	};
 
 	// function for printing text, instead of console.log()
 	Kernel.prototype.stdout = function(text) {
 		this.output.innerHTML += text.toString();
-	}
+	};
 
 	Kernel.prototype.clear = function(text) {
 		this.output.innerHTML = "";
-	}
+	};
 
 	Kernel.prototype.cat = function(file) {
-		if (file != undefined) {
-				this.stdout(this.dir[file]["content"] + "<br/>");
-    	}
-    	else {
+		if (file !== undefined) {
+            this.stdout(this.dir[file].content + "<br/>");
+        } else {
     		this.stdout("please include a file name");
     	}
-    }
+    };
 
 	Kernel.prototype.login = function(name) {
 		if (this.username.contains(name)) {
@@ -105,19 +105,19 @@ window.Kernel = (function() {
         else {
         	this.stdout("Not a real user");
 	    }
-	}
+	};
 
 
 	Kernel.prototype.write = function(file, text) {
 		this.dir[file] = {};
-		this.dir[file]["content"] = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
-	}
+		this.dir[file].content = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
+	};
 
 	Kernel.prototype.newUsr = function(name) {
 		this.username.push(name);
 		this.files["/"]["Users/"][name + "/"] = {};
 		this.stdout("New user: " + name);
-	}
+	};
 
 	Kernel.prototype.usrList = function() {
 		this.stdout("Users: <br />" + this.username + "<br />");
@@ -156,11 +156,11 @@ window.Kernel = (function() {
 			    this.stdout(key + "<br/>");
 			}
 		}
-	}
+	};
 
 	Kernel.prototype.info = function () {
 		this.stdout('Version ' + this.version.toString() + ' Alpha');
-	}
+	};
 
 	Kernel.prototype.cd = function (path) {
 		var i = path;
@@ -176,7 +176,7 @@ window.Kernel = (function() {
 				this.stdout('cd: ' + path + ': No such file or directory');
 			}
 		}
-	}
+	};
 
 	Kernel.prototype.help = function() {
 		this.stdout("COMMANDS: <br />");
@@ -191,7 +191,7 @@ window.Kernel = (function() {
 		this.stdout("login<br />");
 		this.stdout("newUsr<br />");
 		this.stdout("usrList<br />");
-	}
+	};
 
 	Kernel.prototype.fun = function (text, times) {
 		var i = 1;
@@ -201,7 +201,7 @@ window.Kernel = (function() {
 			i++
 		}
 		this.stdout('<br/>');
-	}
+	};
 
 	Kernel.prototype.man = function(cmd) {
 		var out;
