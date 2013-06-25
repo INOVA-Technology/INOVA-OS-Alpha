@@ -1,11 +1,11 @@
 window.Kernel = (function() {
 	"use strict"
-   
+
 	var Kernel = function(output) {
 		this.output = output;
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
-    	this.currentUsr = this.username[0];
+  	this.currentUsr = this.username[0];
 		this.files = {"/": {
 			"Users/": {
 				"Johny/": {
@@ -13,17 +13,17 @@ window.Kernel = (function() {
 				},
 				"Guest/": {
 					"bla.txt": {
-						"content": 
+						"content":
 							"This is a test text file"
 					}
-					
+
 				},
                 "Admin/": {
                     "html.html": {
-						"content": 
+						"content":
 							"yo"
-							
-					} 
+
+					}
                 }
 			},
 			"bin/": {
@@ -60,11 +60,11 @@ window.Kernel = (function() {
 			},
 			"usr/": {
 				"bin/": {
-					
-				}, 
+
+				},
 				"dev/": {
 
-				}	
+				}
 			}
 		}};
 		this.dir = this.files["/"];
@@ -107,8 +107,9 @@ window.Kernel = (function() {
 	    }
 	}
 
-	Kernel.prototype.write = function(file, text) {
-		this.dir[file]["content"] = '"' + text + '"';
+	Kernel.prototype.write = function(file) {
+		this.dir[file] = {};
+		this.dir[file]["content"] = '"' + Array.prototype.slice.call(arguments).join(" ") + '"';
 	}
 
 	Kernel.prototype.newUsr = function(name) {
@@ -137,6 +138,7 @@ window.Kernel = (function() {
 			this[cmd].apply(this, args);
 		} catch(e) {
 			this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
+			console.error(e.message);
 		}
 		this.stdout("<br/>");
 	};
@@ -152,7 +154,6 @@ window.Kernel = (function() {
 			    this.stdout(key + "<br/>");
 			}
 		}
-		// this.stdout("<br/>")
 	}
 
 	Kernel.prototype.info = function () {
@@ -230,13 +231,13 @@ window.Kernel = (function() {
 		else {
 			this.dir[file] = {
 				content: ""
-			};	
+			};
 		}
-		
+
 	};
 
 	Kernel.prototype.pwd = function() {
-		
+
 		// this will show the path, like: /Users/Guest/
 		// or like /usr/local/bin/
 	};
