@@ -73,6 +73,10 @@ s.parentNode.insertBefore(wf, s);
 		this.focus();
 	};
 
+	window.onunload = function() {
+		localStorage.system = JSON.stringify(k.files);
+	}
+
 </script>
 </body>
 </html>

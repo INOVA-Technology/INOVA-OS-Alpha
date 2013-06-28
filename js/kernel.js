@@ -11,7 +11,7 @@ window.Kernel = (function() {
 			"Guest": "andEggs"
 		};
   		this.currentUsr = this.username[0];
-		this.files = {"/": {
+		this.files = localStorage.system || {"/": {
 			"Users/": {
 				"Johny/": {
 
