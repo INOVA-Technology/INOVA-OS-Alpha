@@ -6,10 +6,17 @@ window.Kernel = (function() {
 		this.version = 0.01;
 		this.username = ["root", "Johny", "Guest"];
 		this.password = {
-			"root": "bacon",
-			"Johny": "ham",
-			"Guest": "andEggs"
+			"root": {
+				"password": "bacon"
+			},
+			"Johny": {
+				"password": "ham"
+			},
+			"Guest": {
+				"password": "andEggs"
+			}
 		};
+		
   		this.currentUsr = this.username[0];
 		this.files = localStorage.system || {"/": {
 			"Users/": {
@@ -117,7 +124,7 @@ window.Kernel = (function() {
 
 	Kernel.prototype.login = function(guy, pass) {
 		if (this.username.contains(guy)) {
-			if (pass == this.password[guy]) {
+			if (pass == this.password[guy]["password"]) {
 				this.currentUsr = guy;
 				this.stdout("logged in as " + this.currentUsr + "<br />");
 			}
@@ -139,7 +146,9 @@ window.Kernel = (function() {
 	Kernel.prototype.newUsr = function(name, pass) {
 		this.username.push(name);
 		this.files["/"]["Users/"][name + "/"] = {};
-		this.password[name] = '"' + pass + '"'
+		this.password[name] = {
+			"password": pass
+		};
 		this.stdout("New user: " + name);
 	};
 
@@ -167,9 +176,6 @@ window.Kernel = (function() {
 			console.error(e.message);
 		}
 		this.stdout("<br/>");
-		cookie.set({
-			theFiles: this.files
-		});
 	};
 
 	Kernel.prototype.ls = function (file) {
