@@ -18,7 +18,7 @@ window.Kernel = (function() {
 		};
 		
   		this.currentUsr = this.username[0];
-		this.files = localStorage.system || {"/": {
+		this.files = JSON.parse(localStorage.system)  || {"/": {
 			"Users/": {
 				"Johny/": {
 
@@ -81,7 +81,7 @@ window.Kernel = (function() {
 
 				}
 			}
-		}};
+		}}; 
 		this.dir = this.files["/"];
 	};
 
@@ -167,14 +167,14 @@ window.Kernel = (function() {
 
 	Kernel.prototype.runCommand = function(cmd) {
 		this.stdout(this.currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
-		try {
+		// try {
 			var args = cmd.split(" ").slice(1);
 			var cmd = cmd.split(" ")[0];
 			this[cmd].apply(this, args);
-		} catch(e) {
-			this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
-			console.error(e.message);
-		}
+		// } catch(e) {
+		// 	this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
+		// 	console.error(e.message);
+		// }
 		this.stdout("<br/>");
 	};
 
