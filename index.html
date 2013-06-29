@@ -71,6 +71,7 @@ s.parentNode.insertBefore(wf, s);
 
 	window.onunload = function() {
 		localStorage.system = JSON.stringify(k.files);
+		localStorage.username = k.whoami(false);
 	}
 
 </script>

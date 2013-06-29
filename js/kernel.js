@@ -17,7 +17,7 @@ window.Kernel = (function() {
 			}
 		};
 		
-		this.currentUsr = this.username[0];
+		this.currentUsr = localStorage.username || this.username[0];
 		this.files = localStorage.system ? JSON.parse(localStorage.system) : {"/": {
 			"Users/": {
 				"Johny/": {
@@ -126,7 +126,7 @@ window.Kernel = (function() {
 		if (this.username.contains(guy)) {
 			if (pass == this.password[guy]["password"]) {
 				this.currentUsr = guy;
-				this.stdout("logged in as " + this.currentUsr + "<br />");
+				this.stdout("logged in as " + this.currentUsr);
 			}
 			else {
 				this.stdout("wrong password");
@@ -135,6 +135,7 @@ window.Kernel = (function() {
         else {
         	this.stdout("Not a real user");
 	    }
+	    this.stdout("<br/>")
 	};
 
 
@@ -159,7 +160,7 @@ window.Kernel = (function() {
 	Kernel.prototype.whoami = function(display) {
 		display = typeof display !== 'undefined' ? display : true;
 		if (display) {
-			this.stdout(this.currentUsr);
+			this.stdout(this.currentUsr + "<br/>");
 		} else {
 			return this.currentUsr;
 		}
