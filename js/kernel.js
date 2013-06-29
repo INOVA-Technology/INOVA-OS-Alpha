@@ -17,8 +17,8 @@ window.Kernel = (function() {
 			}
 		};
 		
-  		this.currentUsr = this.username[0];
-		this.files = JSON.parse(localStorage.system)  || {"/": {
+		this.currentUsr = this.username[0];
+		this.files = localStorage.system ? JSON.parse(localStorage.system) : {"/": {
 			"Users/": {
 				"Johny/": {
 
@@ -30,17 +30,17 @@ window.Kernel = (function() {
 					}
 
 				},
-                "Admin/": {
-                    "html.html": {
+				"Admin/": {
+					"html.html": {
 						"content":
 							"yo"
 
 					}
-                }
+				}
 			},
 			"bin/": {
 				"ls": {
-				    "man": "Lists the contents of a directory a files<br/>Usage: ls"
+					"man": "Lists the contents of a directory a files<br/>Usage: ls"
 				},
 				"cd": {
 					"man": "Changes your directory<br/>Usage: cd [directory]"
@@ -86,13 +86,13 @@ window.Kernel = (function() {
 	};
 
 	Array.prototype.contains = function(obj) {
-        var i, l = this.length;
-        for (i = 0; i < l; i++) {
-            if (this[i] === obj) {
-                return true;
-            }
-        }
-        return false;
+		var i, l = this.length;
+		for (i = 0; i < l; i++) {
+			if (this[i] === obj) {
+				return true;
+			}
+		}
+		return false;
 	};
 
 	// function for printing text, instead of console.log()
@@ -116,8 +116,8 @@ window.Kernel = (function() {
 
 	Kernel.prototype.cat = function(file) {
 		if (file !== undefined) {
-            this.stdout(this.dir[file].content + "<br/>");
-        } else {
+			this.stdout(this.dir[file].content + "<br/>");
+		} else {
     		this.stdout("please include a file name");
     	}
     };
