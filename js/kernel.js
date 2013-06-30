@@ -18,7 +18,8 @@ window.Kernel = (function() {
 		};
 		
 		this.currentUsr = localStorage.username || this.username[0];
-		this.$PS1 = "[\\u]$";
+		this.$PS1 = "";
+		this.setprompt("[\\u]$");
 		this.files = localStorage.system ? JSON.parse(localStorage.system) : {"/": {
 			"Users/": {
 				"Johny/": {
@@ -96,12 +97,17 @@ window.Kernel = (function() {
 		return false;
 	};
 
-	Kernel.prototype.setPrompt = function(p) {
-		this.$PS1 = p.replace(/\\/, "\\\\");
+	Kernel.prototype.setprompt = function(p) {
+		this.$PS1 = p;
+		// this.$PS1 = p.replace(/\\/, "\\\\");
 	}
 
-	Kernel.prototype.getPrompt = function(p) {
+	Kernel.prototype.getprompt = function() {
 		return k.$PS1.replace(/\\u/, k.currentUsr);
+		// backslashes must be escaped
+		// in regex and strings
+		// so \\\\ is really \\
+		// and \\ is really \
 	}
 
 	Kernel.prototype.stdout = function(text) {
@@ -175,7 +181,7 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.runCommand = function(cmd) {
-		this.stdout(this.getPrompt() + " " + cmd.toString() + "<br/><br/>");
+		this.stdout(this.getprompt() + " " + cmd.toString() + "<br/><br/>");
 		var args = cmd.split(" ").slice(1);
 		var cmd = cmd.split(" ")[0];
 		if (this.__proto__[cmd]) {
