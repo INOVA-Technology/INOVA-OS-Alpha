@@ -24,13 +24,10 @@ aside {
 	color: green;
 }
 
-label[for=prompt] {
-	margin-right: 8px;
-}
-
 input[type=text] {
 	outline: none;
 	background: none;
 	border: none;
+	margin-left: 0;
 }
 

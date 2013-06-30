@@ -168,14 +168,13 @@ window.Kernel = (function() {
 
 	Kernel.prototype.runCommand = function(cmd) {
 		this.stdout(this.currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
-		// try {
-			var args = cmd.split(" ").slice(1);
-			var cmd = cmd.split(" ")[0];
+		var args = cmd.split(" ").slice(1);
+		var cmd = cmd.split(" ")[0];
+		if (this.__proto__[cmd]) {
 			this[cmd].apply(this, args);
-		// } catch(e) {
-		// 	this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
-		// 	console.error(e.message);
-		// }
+		} else {
+			this.stdout("Unknown command " + '"' +cmd.split(" ")[0] + '"<br/>');
+		}
 		this.stdout("<br/>");
 	};
 
@@ -193,7 +192,7 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.info = function () {
-		this.stdout('Version ' + this.version.toString() + ' Alpha');
+		this.stdout('Version ' + this.version.toString() + ' Alpha<br/>');
 	};
 
 	Kernel.prototype.cd = function (path) {
