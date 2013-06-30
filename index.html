@@ -39,7 +39,7 @@ s.parentNode.insertBefore(wf, s);
 	var output = document.getElementById("output");
 
 	var k = new Kernel(output),
-		user = k.whoami(false),
+		user = k.whoami(),
 		label = document.getElementById('prompt-label');
 
 	label.innerHTML = k.getprompt(); // variable this is the prompt
@@ -52,7 +52,7 @@ s.parentNode.insertBefore(wf, s);
 		if (e.keyCode === 13) {
 			k.runCommand(this.value);
 			if (this.value.substr(0, 5) === "login" || this.value.substr(0, 9) === "setprompt") {
-				var user = k.whoami(false);
+				var user = k.whoami();
 				label.innerHTML = k.getprompt();
 			}
 			history = history.concat([this.value]);
