@@ -41,7 +41,8 @@ s.parentNode.insertBefore(wf, s);
 	var k = new Kernel(output),
 		user = k.whoami(false),
 		label = document.getElementById('prompt-label');
-	label.innerHTML = user + "$";
+
+	label.innerHTML = k.getPrompt(); // variable this is the prompt
        // 38 
         var history = [];
 				var history_index = history.last;
@@ -52,14 +53,14 @@ s.parentNode.insertBefore(wf, s);
 			k.runCommand(this.value);
 			if (this.value.substr(0, 5) === "login") {
 				var user = k.whoami(false);
-				label.innerHTML = user + "$";
+				label.innerHTML = k.getPrompt();
 			}
 			history = history.concat([this.value]);
 			this.value = "";
-			history_index = history[history.length - 1];
+			history_index = history[history.length];
 			e.preventDefault();
 		} else if (e.keycode === 38) {
-			history = history.concat([this.value]);
+			history_index--;
 			this.value = history[history_index];
 		}
 	}, false);

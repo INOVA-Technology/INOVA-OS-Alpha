@@ -18,6 +18,7 @@ window.Kernel = (function() {
 		};
 		
 		this.currentUsr = localStorage.username || this.username[0];
+		this.$PS1 = "[\\u]$";
 		this.files = localStorage.system ? JSON.parse(localStorage.system) : {"/": {
 			"Users/": {
 				"Johny/": {
@@ -95,7 +96,14 @@ window.Kernel = (function() {
 		return false;
 	};
 
-	// function for printing text, instead of console.log()
+	Kernel.prototype.setPrompt = function(p) {
+		this.$PS1 = p.replace(/\\/, "\\\\");
+	}
+
+	Kernel.prototype.getPrompt = function(p) {
+		return k.$PS1.replace(/\\u/, k.currentUsr);
+	}
+
 	Kernel.prototype.stdout = function(text) {
 		this.output.innerHTML += text.toString();
 	};
@@ -167,7 +175,7 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.runCommand = function(cmd) {
-		this.stdout(this.currentUsr.toString() + "$ " + cmd.toString() + "<br/><br/>");
+		this.stdout(this.getPrompt() + " " + cmd.toString() + "<br/><br/>");
 		var args = cmd.split(" ").slice(1);
 		var cmd = cmd.split(" ")[0];
 		if (this.__proto__[cmd]) {
