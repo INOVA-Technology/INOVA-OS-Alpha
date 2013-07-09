@@ -72,6 +72,12 @@ window.Kernel = (function() {
 				},
 				"rm": {
 					"man": "removes a file<br/>Usage: rm [file]"
+				},
+				"write": {
+					"man": "writes to a text file<br/>Usage: write [file] [text]"
+				},
+				"touch": {
+					"man": "creates a text file<br/>Usage: touch [filename]"
 				}
 			},
 			"usr/": {
@@ -198,6 +204,8 @@ window.Kernel = (function() {
 				self.stdout("newUsr<br />");
 				self.stdout("usrList<br />");
 				self.stdout("rm<br />");
+				self.stdout("write<br />");
+				self.stdout("touch<br />");
 			},
 
 			touch: function(file) {
