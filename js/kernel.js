@@ -4,6 +4,7 @@ window.Kernel = (function() {
 	var Kernel = function(output) {
 		this.output = output;
 		this.version = 0.01;
+		this.directory = "~/";
 		this.username = ["root", "Johny", "Guest"];
 		this.password = {
 			"root": {
@@ -170,6 +171,10 @@ window.Kernel = (function() {
 				self.stdout(self.currentUsr + "<br/>");
 			},
 
+			pwd: function() {
+				self.stdout(self.directory + "<br/>");
+			},
+
 			info: function () {
 				self.stdout('Version ' + self.version.toString() + ' Alpha<br/>');
 			},
@@ -179,10 +184,12 @@ window.Kernel = (function() {
 
 				if (i == "~") {
 					self.dir = self.files["/"];
+					self.directory = "~/";
 				}
 				else {
 					if (self.dir[path]) {
 						self.dir = self.dir[path];
+						self.directory = self.directory + path;
 					}
 					else {
 						self.stdout('cd: ' + path + ': No such file or directory');
