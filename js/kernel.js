@@ -4,6 +4,7 @@ window.Kernel = (function() {
 	var Kernel = function(output) {
 		this.output = output;
 		this.version = 0.01;
+		var dirList = ["/"];
 		this.directory = "~/";
 		this.username = ["root", "Johny", "Guest"];
 		this.password = {
@@ -181,15 +182,36 @@ window.Kernel = (function() {
 
 			cd: function (path) {
 				var i = path;
-
+				var num = 0;
 				if (i == "~") {
-					self.dir = self.files["/"];
+					self.dir = this.files["/"];
 					self.directory = "~/";
 				}
+				else if (i === "..") {
+					//var dirList = JSON.stringify(self.directory).replace(/"/g, "").split("/");
+					console.log(self.dir);
+					//ALL POINTLESS CODE//
+					//dirList.pop();
+					//self.directory = dirList;
+					//console.log(dirList);
+					
+					// var b = 0;
+
+					// while (b <= dirList.length) {
+					// 	this.dir = dirList[0] + dirList[];
+					// }
+
+
+					// self.dir = dirList;
+				}
+				
 				else {
 					if (self.dir[path]) {
 						self.dir = self.dir[path];
 						self.directory = self.directory + path;
+						//dirList is part of the cd .. thing. none of it works
+						dirList = dirList.push(path);
+						num += 1;
 					}
 					else {
 						self.stdout('cd: ' + path + ': No such file or directory');
@@ -257,7 +279,9 @@ window.Kernel = (function() {
 				else {
 					this.dir[file + "/"] = {};
 				}
-			}
+			},
+
+			
 		};
 
 		this.commands.setprompt("[\\u]$");
@@ -276,8 +300,8 @@ window.Kernel = (function() {
 	};
 
 	Kernel.prototype.whoami = function() {
-		return this.currentUsr;
-	}
+			return this.currentUsr;
+			}
 
 	Kernel.prototype.getprompt = function() {
 		return k.$PS1.replace(/\\u/, this.currentUsr);
